@@ -25,6 +25,9 @@ pipelineConfig:
             dir: /workspace/source
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
             name: build-container-build
+            env:
+              - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+                value: "true"
           - command: jx step post build --image gcr.io/REPLACE_ME_DOCKER_REGISTRY_ORG/REPLACE_ME_APP_NAME:$PREVIEW_VERSION
             name: postbuild-post-build
           - command: make preview
@@ -57,6 +60,9 @@ pipelineConfig:
             dir: /workspace/source
             image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
             name: build-container-build
+            env:
+              - name: NO_GOOGLE_APPLICATION_CREDENTIALS
+                value: "true"
           - command: jx step post build --image gcr.io/REPLACE_ME_DOCKER_REGISTRY_ORG/REPLACE_ME_APP_NAME:${VERSION}
             name: build-post-build
           - command: jx step changelog --version v${VERSION}
